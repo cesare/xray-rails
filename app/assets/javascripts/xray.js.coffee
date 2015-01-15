@@ -1,11 +1,10 @@
 window.Xray = {}
-return unless $ = window.jQuery
 
 # Max CSS z-index. The overlay and xray bar use this.
 MAX_ZINDEX = 2147483647
 
 # Initialize Xray. Called immediately, but some setup is deferred until DOM ready.
-Xray.init = do ->
+Xray.init = ->
   return if Xray.initialized
   Xray.initialized = true
 
@@ -283,3 +282,10 @@ util =
       width  : boxFrame.right - boxFrame.left
       height : boxFrame.bottom - boxFrame.top
     }
+
+init = ->
+  if window.jQuery && window.$
+    Xray.init()
+  else
+    setTimeout init, 500
+init()
